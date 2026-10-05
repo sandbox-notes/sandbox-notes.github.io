@@ -49,6 +49,29 @@ I detonated a LockBit 5.0 Windows sample on an isolated network. All files in th
 
 One caveat: LockBit variants are known to use ARP/SMB for lateral movement, but reports say the scan does not run in a lab with no reachable peers. My lab had no peer VM, so I could not test that.
 
+## Second run: after infection, and the pcap
+
+I ran a different build of LockBit 5.0 (SHA256 `7ea5afbc166c4e23498aa9747be81ceaf8dad90b8daa07a6e4644dc7c2277b82`) in the same lab. I did not record the command-line options used.
+
+| Observation | Detail |
+|---|---|
+| pcap | 1,152 packets, about 12 minutes (19:28:51 to 19:41:01), covering the execution (around 19:29) |
+| DNS / TLS | Only Microsoft domains and a Chrome update check (`update.googleapis.com`) |
+| Outbound connection attempts | None (pings are the same background ICMP as before) |
+| SMB (445) | None |
+| Local files | A **different random 16-hex-digit extension per file** was appended |
+| Ransom note | `ReadMeForDecrypt.txt` |
+| Executable | Showed as `0 KB` in Explorer after the run |
+| Drives | New drive letters (`M:`, `N:`) appeared right after execution, and a note was also dropped on `N:` (which holds an EFI partition) |
+
+![Encrypted Downloads folder](/images/lockbit5-downloads-encrypted.png)
+
+![Ransom note on the N: drive](/images/lockbit5-n-drive-note.png)
+
+- The sample **ran to completion and encrypted files**, yet the capture shows no C2 and no outbound connection attempts, matching the first run.
+- Because the extension differs per file, detection that relies on a list of known extensions would struggle.
+- These observations alone do not prove that the sample created `M:` and `N:`.
+
 ## Lessons learned
 
 | Symptom | Cause | Fix |
