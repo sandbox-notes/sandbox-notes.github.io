@@ -1,7 +1,7 @@
 ---
 title: "LockBit 5.0을 격리 랩에서 돌렸더니 pcap이 비어 있었다"
 date: 2026-10-04
-draft: true
+draft: false
 tags: ["LockBit", "ransomware", "sandbox", "REMnux", "FlareVM"]
 description: "파일은 전부 암호화됐는데 네트워크 캡처에는 악성 통신이 없었던 이유를 공개 분석과 대조해 확인했다."
 ---

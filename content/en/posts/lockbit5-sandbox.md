@@ -1,12 +1,12 @@
 ---
 title: "I Ran LockBit 5.0 in an Isolated Lab and the PCAP Was Empty"
 date: 2026-10-04
-draft: true
+draft: false
 tags: ["LockBit", "ransomware", "sandbox", "REMnux", "FlareVM"]
 description: "Every file was encrypted, yet the packet capture showed no malicious traffic. Here is why, checked against public analyses."
 ---
 
-> Machine-translated draft. Review the wording before publishing. The sample itself is never shared; only the hash and links to public analyses are.
+> Translated from the Korean original. The sample itself is never shared; only the hash and links to public analyses are.
 
 ## TL;DR
 
