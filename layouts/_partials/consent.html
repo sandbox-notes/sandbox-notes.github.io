@@ -1,0 +1,44 @@
+<div id="consent-banner" class="consent" role="dialog" aria-live="polite" aria-label="{{ site.Params.consentSettings }}" hidden>
+  <p>{{ site.Params.consentText }}
+    {{ range where site.RegularPages "File.BaseFileName" "privacy" }}<a href="{{ .RelPermalink }}">{{ site.Params.privacyLabel }}</a>{{ end }}
+  </p>
+  <div class="consent-actions">
+    <button type="button" id="consent-reject">{{ site.Params.consentReject }}</button>
+    <button type="button" id="consent-accept" class="primary">{{ site.Params.consentAccept }}</button>
+  </div>
+</div>
+<script>
+(function () {
+  var KEY = "sn-consent";
+  var banner = document.getElementById("consent-banner");
+  var adsClient = {{ site.Params.adsenseClient | jsonify | safeJS }};
+
+  function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+
+  function loadAds() {
+    if (!adsClient || window.__adsLoaded) return;
+    window.__adsLoaded = true;
+    var s = document.createElement("script");
+    s.async = true;
+    s.crossOrigin = "anonymous";
+    s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + encodeURIComponent(adsClient);
+    document.head.appendChild(s);
+  }
+
+  function apply(v) {
+    banner.hidden = true;
+    if (v === "granted") loadAds();
+    document.dispatchEvent(new CustomEvent("sn-consent", { detail: v }));
+  }
+
+  var saved = read();
+  if (saved === "granted" || saved === "denied") apply(saved); else banner.hidden = false;
+
+  document.getElementById("consent-accept").addEventListener("click", function () { write("granted"); apply("granted"); });
+  document.getElementById("consent-reject").addEventListener("click", function () { write("denied"); apply("denied"); });
+
+  var reopen = document.getElementById("consent-reopen");
+  if (reopen) reopen.addEventListener("click", function (e) { e.preventDefault(); banner.hidden = false; });
+})();
+</script>

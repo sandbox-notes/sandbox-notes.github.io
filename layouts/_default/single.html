@@ -1,0 +1,14 @@
+{{ define "main" }}
+  <article class="post">
+    <h1>{{ .Title }}</h1>
+    {{ if eq .Section "posts" }}
+      <div class="meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+        <span class="dot">{{ .ReadingTime }} {{ site.Params.minRead }}</span>
+        {{ if .Draft }}<span class="badge">{{ site.Params.draftNotice }}</span>{{ end }}
+      </div>
+      {{ partial "tags.html" . }}
+    {{ end }}
+    {{ .Content }}
+  </article>
+{{ end }}

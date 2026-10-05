@@ -1,0 +1,16 @@
+# 개인 작업용 메모와 다른 플랫폼용 원고는 공개 저장소에 올리지 않는다
+START-HERE.md
+tistory/
+public/
+resources/_gen/
+.hugo_build.lock
+# 샘플, pcap 원본, 영상 원본은 저장소에 넣지 않는다
+*.exe
+*.dll
+*.elf
+*.zip
+*.iso
+*.pcap
+*.pcapng
+*.pml
+*.mp4

@@ -1,0 +1,16 @@
+{{ define "main" }}
+  <section class="hero">
+    <p class="eyebrow">{{ .Kind }}</p>
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}<div class="hero-note">{{ . }}</div>{{ end }}
+  </section>
+  <div class="cards" style="margin-top:28px">
+    {{ range .Pages }}
+      <article class="card">
+        <div class="meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></div>
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        {{ with .Description }}<p>{{ . }}</p>{{ end }}
+      </article>
+    {{ end }}
+  </div>
+{{ end }}

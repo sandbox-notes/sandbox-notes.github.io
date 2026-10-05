@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{ $title := cond .IsHome site.Title (printf "%s · %s" .Title site.Title) }}
+  {{ $desc := or .Description site.Params.description }}
+  <title>{{ $title }}</title>
+  <meta name="description" content="{{ $desc }}">
+  <meta name="color-scheme" content="light dark">
+  <meta property="og:title" content="{{ $title }}">
+  <meta property="og:description" content="{{ $desc }}">
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a7f78'/%3E%3Cpath d='M9 11l5 5-5 5M16 22h7' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  {{ range .AllTranslations }}<link rel="alternate" hreflang="{{ .Language.Locale }}" href="{{ .Permalink }}">{{ end }}
+  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+  <link rel="stylesheet" href="{{ "css/syntax.css" | relURL }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="{{ site.Home.RelPermalink }}">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="var(--accent)"/><path d="M9 11l5 5-5 5M16 22h7" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>{{ site.Title }}</span>
+      </a>
+      <nav>
+        {{ range where site.RegularPages "File.BaseFileName" "about" }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}
+        <span class="sep" aria-hidden="true"></span>
+        {{ range .AllTranslations }}<a class="{{ if eq .Language.Lang site.Language.Lang }}current{{ end }}" href="{{ .Permalink }}" hreflang="{{ .Language.Locale }}">{{ .Language.Label }}</a>{{ end }}
+      </nav>
+    </div>
+  </header>
+  <main class="wrap">{{ block "main" . }}{{ end }}</main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>{{ site.Params.description }}{{ range where site.RegularPages "File.BaseFileName" "privacy" }} · <a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }} · <a href="#" id="consent-reopen">{{ site.Params.consentSettings }}</a></p>
+    </div>
+  </footer>
+  {{ partial "consent.html" . }}
+</body>
+</html>
