@@ -51,7 +51,7 @@ One caveat: LockBit variants are known to use ARP/SMB for lateral movement, but 
 
 ## Second run: after infection, and the pcap
 
-I ran a different build of LockBit 5.0 (SHA256 `7ea5afbc166c4e23498aa9747be81ceaf8dad90b8daa07a6e4644dc7c2277b82`) in the same lab. I did not record the command-line options used.
+I ran a different build of LockBit 5.0 (SHA256 `7ea5afbc166c4e23498aa9747be81ceaf8dad90b8daa07a6e4644dc7c2277b82`) in the same lab. I did not record the command-line options used (see the `-h` section below for the option list).
 
 | Observation | Detail |
 |---|---|
@@ -71,6 +71,29 @@ I ran a different build of LockBit 5.0 (SHA256 `7ea5afbc166c4e23498aa9747be81cea
 - The sample **ran to completion and encrypted files**, yet the capture shows no C2 and no outbound connection attempts, matching the first run.
 - Because the extension differs per file, detection that relies on a list of known extensions would struggle.
 - These observations alone do not prove that the sample created `M:` and `N:`.
+
+## What `-h` shows
+
+Running this build with `-h` prints a banner reading **LOCKBIT5.0 / ChuongDoung Locker v1.01 / Windows x64** and an option list. I did not record which options I used in the run above; the table below is what the help text says.
+
+![Output of -h](/images/lockbit5-help.png)
+
+| Group | Option | Meaning (summary of the help text) |
+|---|---|---|
+| Targets | `-p <dirs>` / `-b <dirs>` | Directories to encrypt / to bypass (semicolon-separated) |
+| Modes | `-i` | Invisible mode: no extension change, no notes, no modification-date change |
+| | `-v` / `-d` | Verbose mode with a console status bar / debug output |
+| Notes | `-n <0/1/2>` | Note storage (0 none, 1 everywhere, 2 `C:\` only); ignored with `-i` |
+| Encryption | `-m <all/local/net>` | Encrypt local files only, or network only |
+| | `-f` / `-w` | Fast mode / wipe free space afterward |
+| Other | `-k` | Do not delete the `.exe` |
+| | `-nomutex` | Allow multiple instances |
+| | `-t <seconds>` | Delay before encryption starts |
+
+- The command line is limited to 500 characters.
+- The executable showing as `0 KB` in the run above may relate to the existence of the `-k` option (do not delete the `.exe`), but I have no record of the options used, so **I cannot confirm the cause.**
+- The `-m net` option suggests SMB traffic could differ where network shares exist. My lab had no peer VM, so I could not test it.
+- The strings in the screenshot are the help text exactly as the sample prints it.
 
 ## Lessons learned
 
