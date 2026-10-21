@@ -17,6 +17,7 @@
   {{ range .AllTranslations }}<link rel="alternate" hreflang="{{ .Language.Locale }}" href="{{ .Permalink }}">{{ end }}
   <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
   <link rel="stylesheet" href="{{ "css/syntax.css" | relURL }}">
+  {{ partial "analytics.html" . }}
 </head>
 <body>
   <header class="site-header">

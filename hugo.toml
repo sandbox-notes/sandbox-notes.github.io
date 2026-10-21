@@ -50,5 +50,9 @@ enableRobotsTXT = true
   # 비워 두면 광고 코드는 전혀 출력되지 않는다.
   adsenseClient = ""
 
+  # GoatCounter 사이트 코드(https://<코드>.goatcounter.com 의 <코드>). 쿠키를 쓰지 않는 방문 통계 도구다.
+  # 비워 두면 통계 코드는 전혀 출력되지 않는다. 값을 넣을 때 개인정보 처리방침 4절도 함께 고친다.
+  goatcounterCode = ""
+
 [markup.goldmark.renderer]
   unsafe = false
