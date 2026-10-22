@@ -1,6 +1,6 @@
 ---
 title: "KRACK: How the WPA2 4-Way Handshake Fell Apart"
-date: 2026-10-28T09:00:00+09:00
+date: 2026-10-23T05:00:00+09:00
 draft: false
 series: ["Wi-Fi Security Series"]
 tags: ["Wi-Fi", "WPA2", "KRACK", "hostapd", "wpa_supplicant", "AP"]
