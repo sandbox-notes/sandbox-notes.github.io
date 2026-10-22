@@ -4,6 +4,11 @@ defaultContentLanguage = "ko"
 defaultContentLanguageInSubdir = true
 enableRobotsTXT = true
 
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  series = "series"
+
 [pagination]
   pagerSize = 10
 
@@ -26,6 +31,7 @@ enableRobotsTXT = true
       consentReject = "거부"
       consentSettings = "쿠키 설정"
       privacyLabel = "개인정보 처리방침"
+      seriesLabel = "연재"
   [languages.en]
     label = "English"
     locale = "en-US"
@@ -44,6 +50,7 @@ enableRobotsTXT = true
       consentReject = "Reject"
       consentSettings = "Cookie settings"
       privacyLabel = "Privacy Policy"
+      seriesLabel = "Series"
 
 [params]
   # AdSense 승인 후 게시자 ID(ca-pub-XXXXXXXXXXXXXXXX)를 넣으면 동의한 방문자에게만 광고 스크립트가 로드된다.

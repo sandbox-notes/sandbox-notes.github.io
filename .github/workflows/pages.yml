@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: "30 0 * * *"   # every day 09:30 KST: publishes posts whose date has arrived
 
 permissions:
   contents: read

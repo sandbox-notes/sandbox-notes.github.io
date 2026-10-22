@@ -174,3 +174,8 @@ li { margin: 0.25em 0; }
   .site-header, .site-footer, .consent { display: none; }
   body { background: #fff; color: #000; }
 }
+
+.series-box{margin:18px 0 26px;padding:14px 18px;border:1px solid var(--line,#d8dee4);border-left:4px solid #0a7f78;border-radius:8px;background:rgba(10,127,120,.06)}
+.series-box .series-title{margin:0 0 6px;font-weight:600}
+.series-box ol{margin:0;padding-left:20px}
+.series-box li{margin:2px 0}

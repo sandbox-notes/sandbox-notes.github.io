@@ -1,0 +1,11 @@
+{{- $cur := . -}}
+{{- range .GetTerms "series" -}}
+<aside class="series-box">
+  <p class="series-title">{{ site.Params.seriesLabel }}: <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></p>
+  <ol>
+    {{- range .Pages.ByDate -}}
+    <li>{{ if eq . $cur }}<strong aria-current="page">{{ .Title }}</strong>{{ else }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}</li>
+    {{- end -}}
+  </ol>
+</aside>
+{{- end -}}
